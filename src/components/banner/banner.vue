@@ -156,34 +156,10 @@ a {
 }
 
 .banner-in {
-    color: #1a1a1a;
-    height: 24px;
-    line-height: 24px;
-    flex: 1;
-    padding: 0;
-    overflow: hidden;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    background: transparent;
-    border: none;
-    outline: none;
-    resize: none;
+    margin: 0px;
 }
 .banner-in-w {
     margin-left: 27px;
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 280px;
-    height: 34px;
-    padding: 4px 10px;
-    font-size: 14px;
-    background: #fff;
-    border: 1px solid #ebebeb;
-    border-radius: 3px;
-    box-sizing: border-box;
-    transition: background .2s,border .2s;
+
 }
 </style>
