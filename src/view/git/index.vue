@@ -1,15 +1,17 @@
 <template>
-    <div class="git-w" >
-        <div class="g-o-w" v-for="item in gits">
-            <a :href="item.html_url" target="_blank">
-                <span class="g-o-i name">{{item.name}}</span>
-                <div class="lin">
-                    <span class="g-o-i star">&#x2605; {{item.stargazers_count}}</span>       
-                    <span class="g-o-i lan">&reg; {{item.language}}</span>               
-                </div>
-            </a>
-        </div>
+    <div>
+        <div class="git-w" >
+            <div class="g-o-w" v-for="item in gits">
+                <a :href="item.html_url" target="_blank">
+                    <span class="g-o-i name">{{item.name}}</span>
+                    <div class="lin">
+                        <span class="g-o-i star">&#x2605; {{item.stargazers_count}}</span>       
+                        <span class="g-o-i lan">&reg; {{item.language}}</span>               
+                    </div>
+                </a>
+            </div>
 
+        </div>
     </div>
 </template>
 
@@ -22,9 +24,8 @@ export default {
             gits:[]
         }
     },
-    created() {
+    mounted() {
         this.axios.get(API.getrepo).then((res)=>{
-            console.log(res)
             if(res.data.code > 10) {
                 this.gits = res.data.data.sort((a,b)=>{
                     return b.stargazers_count - a.stargazers_count

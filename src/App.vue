@@ -6,12 +6,7 @@
 
 <script>
 export default {
-	name: 'App',
-	methods:{
-		scroll(e) {
-			// console.log(e)
-	}
-  }
+	name: 'App'
 }
 </script>
 
@@ -32,5 +27,21 @@ export default {
 a {
     text-decoration: none;
     color: #1765b7;
+}
+body {
+	background: #f6f6f6;
+	font-size: 15px;
+}
+button {
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 </style>

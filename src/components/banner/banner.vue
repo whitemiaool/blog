@@ -4,7 +4,7 @@
                 <div v-if="swih">
                     <div class="banner-inner">
                         <a class="banner-title" href="">记乎</a>
-                        <a class="banner-mp" v-for="item in nav1" :key=item.title :href=item.url>
+                        <a class="banner-mp" v-for="item in nav1" target="_blank" :key=item.title :href="item.url">
                             {{item.title}}
                         </a>
                         <!-- <div class="banner-in-w" :style="tipfuc?'':'background:#f3f3f3'">
@@ -16,10 +16,10 @@
             <transition name="ban-fa">
                 <div v-if="!swih">
                     <div class="banner-inner">
-                        <a class="banner-title" href="">记乎</a>
-                        <a class="banner-mp" v-for="item in nav" :key=item.title :href=item.url>
+                        <router-link class="banner-title" to="/">记乎</router-link>
+                        <router-link class="banner-mp" v-for="item in nav" :key=item.title :to="item.url">
                             {{item.title}}
-                        </a>
+                        </router-link>
                         <div class="banner-in-w" :style="tipfuc?'':'background:#f3f3f3'">
                             <input ref="input" @focus.stop="infuc()" @input="change" @blur.stop="infuc" class="banner-in" :placeholder="tipfuc?'':'请输不要不要输入!'"  type="text">
                         </div>
@@ -46,7 +46,7 @@ export default {
             tipfuc:false,
             show:false,
             nav:[],
-            nav1:[{title:'G记',url:'/'},{title:'否记',url:'/'},{title:'差记',url:'/'}]
+            nav1:[{title:'Git',url:'//github.com/whitemiaool'},{title:'否记',url:'//dyxuan.top'},{title:'差记',url:'//dyxuan.top'}]
         }
     },
     props:{
@@ -67,8 +67,9 @@ export default {
             this.show = false;
         }
     },
-    beforeCreate() {
-        this.axios.get(API.getbar).then((res)=>{
+    mounted() {
+        console.log(this.nav[0])
+        !this.nav[0]&&this.axios.get(API.getbar).then((res)=>{
             // console.log(res)
             let data = res.data;
             if(data.code > 10) {
