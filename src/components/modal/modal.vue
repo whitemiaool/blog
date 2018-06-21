@@ -9,7 +9,7 @@
                 <slot></slot>
             </div>
             <div class="modal-b">
-                <div class="modal-i" @click="close">&#9776;</div>
+                <div class="modal-i" @click="confirm">&#9776;</div>
                 <div class="modal-i" @click="close">&#9783;</div>
             </div>
         </div>
@@ -32,6 +32,9 @@ export default {
             default:false
         },
         close:{
+            default:()=>{}
+        },
+        confirm:{
             default:()=>{}
         }
 
@@ -64,6 +67,7 @@ export default {
 }
 .modal-t-w {
     position: relative;
+    height: 50px;
 }
 .modal-i {
     color: #949494;
@@ -102,7 +106,6 @@ export default {
     z-index: 1000;
 }
 .modle-t {
-    height: 30px;
     line-height: 30px;
     border-bottom: 1px solid #ccc;
     padding: 5px 10px;

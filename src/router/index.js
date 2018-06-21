@@ -7,6 +7,7 @@ import XJP from '@/view/xjp'
 import Default from '@/view/blog'
 import Paper from '@/view/paper'
 import OnePaper from '@/view/onepaper'
+import Add from '@/view/addpaper'
 
 Vue.use(Router)
 
@@ -41,6 +42,10 @@ export default new Router({
 				path: 'paper/:id',
 				name: 'git',
 				component: OnePaper,
+			},{
+				path: 'addpaper',
+				name: 'git',
+				component: Add,
 			}]
 		}
 	]

@@ -249,7 +249,7 @@ textarea,
 input[type=password],
 select {
     display: inline-block;
-    width: 210px;
+    /* width: 210px; */
     padding: 4px;
     font-size: 13px;
     font-weight: normal;
