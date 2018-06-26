@@ -12,12 +12,12 @@
                             <img :src="item.img" alt="">
                         </div>
                         <div class="b-b-w">
-                            <div class="b-b-c">{{item.breif}}<span class="b-c-m">阅读全文</span></div>
+                            <div class="b-b-c">{{item.brief}}<span class="b-c-m">阅读全文</span></div>
                         </div>
                         <div style="clear:both"></div>
                     </div>
                     <div v-if="item.showCon">
-                        <div v-html="item.all" class="b-all">
+                        <div v-html="item.content" class="b-all markdown-body">
                         </div>
                     </div>
                     <div class="b-c-w">
@@ -297,6 +297,19 @@ export default {
                 this.blogs[index].addo = false;
             },400)
         }
+    },
+    created() {
+        this.axios.get(API.getallpaper).then((res)=>{
+            this.blogs = res.data.data.map((item,i)=>{
+                item.showC   = false
+                item.addo    = false
+                item.cmt     = '条评论'
+                item.showFix = false
+                item.showCon = false
+                item.topic   = item.topic.name
+                return item
+            })
+        })
     },
     mounted() {
         document.addEventListener('scroll',this.wheel)

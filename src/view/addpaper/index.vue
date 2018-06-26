@@ -2,12 +2,15 @@
     <div>
         <div class="ad-w">
             <div class="ad-o">
-                <textarea style="height:inherit"  v-model="content"  placeholder="请写下你的评价" name="" id="" cols="40" rows="20"></textarea>
+                <Input v-model="tl" placeholder="输入一个标题" style="width: calc(80% - 8px)"></Input>
+            </div>
+            <div class="ad-o">
+                <textarea style="height:inherit"  v-model="content"  placeholder="请写下你的内容" name="" id="" cols="40" rows="20"></textarea>
             </div>
             <div class="ad-o">
                 <label for="">话题:</label>
                 <Select v-model="model1" style="width:200px">
-                    <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                    <Option v-for="item in cityList" :value="item.value" :key="item.value"><span class="ad-la">  {{ item.label }} <i @click.stop="delonetopic(item.value)" class="cl"><Icon type="close-circled"></Icon></i> </span></Option>
                 </Select>
                 <button @click="addTopic" class="b-cm-p">+添加</button>
             </div>
@@ -35,32 +38,8 @@ export default {
             content:'',
             show:false,
             value:'',
-            cityList: [
-                    {
-                        value: '23',
-                        label: 'New York'
-                    },
-                    {
-                        value: 'London',
-                        label: 'London'
-                    },
-                    {
-                        value: 'Sydney',
-                        label: 'Sydney'
-                    },
-                    {
-                        value: 'Ottawa',
-                        label: 'Ottawa'
-                    },
-                    {
-                        value: 'Paris',
-                        label: 'Paris'
-                    },
-                    {
-                        value: 'Canberra',
-                        label: 'Canberra'
-                    }
-                ],
+            tl:'',
+            cityList: [],
                 model1: ''
         }
     },
@@ -69,10 +48,15 @@ export default {
             this.show = false;
             if(this.value.trim()) {
                 this.axios.post(API.addtopic,{content:this.value}).then((res)=>{
-                    console.log(res);
+                    this.getalltopic();
                 })
             }
             this.value = '';
+        },
+        delonetopic(id) {
+            this.axios.post(API.deltopic,{data:id}).then((res)=>{
+                this.getalltopic();
+            })
         },
         addTopic() {
             this.show = true
@@ -84,11 +68,26 @@ export default {
             // console.log(this.content)
         },
         save() {
-            // this.axios.post(API.addpaper,{content:this.content}).then((res)=>{
-            //     console.log(res)
-            // })
+            this.axios.post(API.addpaper,{content:this.content,topic:this.model1,tl:this.tl}).then((res)=>{
+                console.log(res)
+            })
             console.log(this.model1)
+        },
+        getalltopic() {
+            this.axios.get(API.getopic).then((res)=>{
+                let list = [];
+                res.data.data.map((item,i)=>{
+                    let one = {};
+                    one.value = item._id;
+                    one.label = item.name;
+                    list.push(one);
+                })
+                this.cityList = list;
+            })
         }
+    },
+    created() {
+        this.getalltopic();
     },
     mounted() {
 
@@ -103,6 +102,17 @@ export default {
 /* .ad-t,.ad-c {
     text-align: left;
 } */
+.cl {
+    position: absolute;
+    right: 0px;
+    color: red;
+}
+.ad-la {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 .ad-o {
     margin: 20px;
     display: block;
