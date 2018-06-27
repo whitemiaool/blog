@@ -6,6 +6,7 @@ export default {
     getrepo:`${host}/githubrep`,
 
     addpaper:`${host}/addonepaper`,
+    delonepaper:`${host}/delonepaper`,
     getallpaper:`${host}/getallpaper`,
 
     addtopic:`${host}/addonetopic`,

@@ -8,6 +8,7 @@ import Default from '@/view/blog'
 import Paper from '@/view/paper'
 import OnePaper from '@/view/onepaper'
 import Add from '@/view/addpaper'
+import Console from '@/view/console'
 
 Vue.use(Router)
 
@@ -46,6 +47,10 @@ export default new Router({
 				path: 'addpaper',
 				name: 'git',
 				component: Add,
+			},{
+				path: 'console',
+				name: 'git',
+				component: Console,
 			}]
 		}
 	]
