@@ -296,24 +296,6 @@ export default {
 </script>
 
 <style scoped>
-.xin {
-    position: relative;
-}
-.lsact{
-    color: red !important;
-    top: -20px !important;
-    opacity: 1 !important;
-    transition: all 0.7s;
-}
-.xin .ls {
-    position: absolute;
-    top: 2px;
-    font-size: 12px;
-    right: 4px;
-    color: #ffc2c2;
-    opacity: 0;
-    
-}
 
 .b-xx {
     font-size: 14px;
