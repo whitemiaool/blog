@@ -35,7 +35,7 @@ height: 30px;
     justify-content: space-between;
 }
 .b-cm-f textarea {
-    height: 20px;
+    height: 35px;
     width: calc(100% - 100px);
     outline: none;
     border: 1px solid #ccc;
@@ -163,6 +163,7 @@ height: 30px;
     color: #0084ff;
     background: rgba(0,132,255,.1);
     border-color: transparent;
+    transition: all 0.5s;
 }
 .b-i-w img {
     position: absolute;
@@ -266,4 +267,39 @@ height: 30px;
     height: 400px;
     top: 180px;
     background: #fff;
+}
+
+.b-cm-pa {
+    padding: 10px 0px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+.VoteButton:hover {
+    background: #38d1c8;
+    color: #fff;
+}
+.cm-s {
+    color: #40d380;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.xin {
+    position: relative;
+}
+.lsact{
+    color: red !important;
+    top: -20px !important;
+    opacity: 1 !important;
+    transition: all 0.7s;
+}
+.xin .ls {
+    position: absolute;
+    top: 2px;
+    font-size: 12px;
+    right: 4px;
+    color: #ffc2c2;
+    opacity: 0;
+    
 }

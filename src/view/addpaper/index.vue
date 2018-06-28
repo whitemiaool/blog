@@ -125,7 +125,7 @@ export default {
 }
 .ad-w textarea {
     resize: none;
-    width: 80%;
+    width: calc(80% - 10px);
     margin: 0 auto;
 }
 .git-w {

@@ -1,5 +1,6 @@
 <template>
         <div class="banner">
+            <!-- <div><a class="banner-title" href="">记乎</a></div> -->
             <transition name="ban-b">
                 <div v-if="swih">
                     <div class="banner-inner">
@@ -85,7 +86,7 @@ export default {
 
 <style scoped>
 .ban-fa-enter-active {
-    transition: all .5s;
+    transition: all .8s;
 }
 .ban-fa-leave-active {
     transform: translateY(-100%)
@@ -97,7 +98,7 @@ export default {
     transform: translateY(-100%)
 }
 .ban-b-enter-active, .ban-fa-b-leave-active {
-    transition: all 0.5s;
+    transition: all 0.8s;
 }
 .ban-b-enter-to {
     transform: translateY(0%)

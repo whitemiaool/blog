@@ -1,13 +1,13 @@
 <template>
     <div style="background:#fff;padding-top:40px">
         <Tabs :value="label" @on-click="test">
-            <TabPane label="macOS" name='1t' icon="social-apple">
+            <TabPane label="添加文章" name='1t' icon="edit">
                 <add></add>
             </TabPane>
-            <TabPane  label="Windows" name='2t' icon="social-windows">
+            <TabPane  label="整理论文" name='2t' icon="gear-b">
                 <Del :clk="clk"></Del>
             </TabPane>
-            <TabPane label="Linux" name='3t' icon="social-tux">标签三的内容</TabPane>
+            <TabPane label="..." name='3t' icon="ios-medical-outline">开发中</TabPane>
         </Tabs>
     </div>
 </template>
