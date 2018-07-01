@@ -2,9 +2,15 @@
     <div>
         <div class="ad-w">
             <div class="pd-o" v-for="(item,i) in paperlist">
-                <h3 class="pd-t">{{item.title}}</h3>
-                <div class="pd-b">{{item.brief}}</div>
-                <span class="pd-d" @click="delone(item._id)"><Icon type="close-round"></Icon></span>
+                <div v-if="!item.show">
+                    <h3 class="pd-t">{{item.title}} </h3>
+                    <div class="pd-b">{{item.brief}}</div>
+                    <span class="pd-d" @click="delone(item._id)"><Icon type="close-round"></Icon></span>
+                </div>
+                <span @click="edit(item,i)" class="ed-xx">编辑</span>
+                <div v-if="item.show">
+                    <add :data="dt"></add>
+                </div>
             </div>
         </div>
     </div>
@@ -13,10 +19,12 @@
 <script>
 import API from '../../api'
 import model from '../../components/modal/modal'
+import add from '../addpaper'
 export default {
     name:'git',
     data() {
         return {
+            dt:{},
             paperlist:[],
         }
     },
@@ -36,20 +44,40 @@ export default {
         },
         getalltopic() {
             this.axios.get(API.getallpaper).then((res)=>{
-                this.paperlist = res.data.data;
+                let data = res.data.data.map((item)=>{
+                    item.show = false;
+                    return item 
+                })
+                this.paperlist = data;                
             })
+        },
+        edit(item,index) {
+            this.paperlist[index].show = !this.paperlist[index].show ;
+            this.dt.content = item.content;
+            this.dt.topic = item.topic._id;
+            this.dt.tl = item.title;
+            this.dt.id = item._id;
+            this.dt.tp = item.topic.name;
         }
     },
     created() {
         this.getalltopic();
     },
     components:{
-        model
+        model,
+        add
     }
 }
 </script>
 
 <style scoped>
+.ed-xx {
+    color: #ccc;
+    font-size: 12px;
+    position: absolute;
+    top: 0px;
+    cursor: pointer;
+}
 .pd-d {
     position: absolute;
     right: 10px;

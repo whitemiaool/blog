@@ -4,11 +4,16 @@ import HelloWorld from '@/components/HelloWorld'
 import Demo from '@/view/demo'
 import Git from '@/view/git'
 import XJP from '@/view/xjp'
-import Default from '@/view/blog'
+import Blog from '@/view/blog'
 import Paper from '@/view/paper'
 import OnePaper from '@/view/onepaper'
 import Add from '@/view/addpaper'
+import Del from '@/view/delpaper'
+import Edit from '@/view/editpaper'
 import Console from '@/view/console'
+import TopicPaper from '@/view/topicpaper'
+import Default from '@/view/default'
+// import Add from '@/view/addpaper'
 
 Vue.use(Router)
 
@@ -21,9 +26,18 @@ export default new Router({
 			name: 'HelloWorld',
 			component: HelloWorld,
 			children:[{
-				path: '',
+				path: '/',
 				name: 'de',
-				component: Default
+				component: Default,
+				children:[{
+					path: '/',
+					name: 'de',
+					component: Blog},
+					{
+					path: 'topic/:id',
+					name: 'git',
+					component: TopicPaper,
+				}]
 			},{
 				path: 'demo',
 				name: 'demo',
@@ -52,6 +66,19 @@ export default new Router({
 				path: 'console',
 				name: 'git',
 				component: Console,
+				children:[{
+					path: 'add',
+					name: 'de',
+					component: Add
+				},{
+					path: 'del',
+					name: 'de',
+					component: Del
+				},{
+					path: 'edit',
+					name: 'de',
+					component: Edit
+				}]
 			}]
 		}
 	]

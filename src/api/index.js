@@ -1,5 +1,10 @@
 // const host = 'https://dyxuan.top/api/'
-const host = 'http://localhost:3000'
+let  host = ''
+if(/dyxuan/.test(location.host)) {
+    host = 'https://dyxuan.top/api/'
+} else {
+    host = 'http://localhost:3000'
+}
 
 export default {
     getbar:`${host}/getbar`,
@@ -9,6 +14,8 @@ export default {
     delonepaper:`${host}/delonepaper`,
     getallpaper:`${host}/getallpaper`,
     getonepaper:`${host}/getonepaper`,
+    getpact:`${host}/getpact`,
+    updatepaper:`${host}/updatepaper`,
     clickstar:`${host}/clickstar`,
     commentpaper:`${host}/commentpaper`,
     getpapercom:`${host}/getpapercom`,

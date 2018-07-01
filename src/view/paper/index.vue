@@ -34,11 +34,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .p-w {
     margin-right: 10px;
     width: 694px;
     height: 100px;
     padding-bottom: 20px;
 }
+
 </style>

@@ -9,7 +9,7 @@
             </div>
             <div class="ad-o">
                 <label for="">话题:</label>
-                <Select v-model="model1" :placeholder="tp" style="width:200px">
+                <Select v-model="model1"  style="width:200px">
                     <Option v-for="item in cityList" :value="item.value" :key="item.value"><span class="ad-la">  {{ item.label }} <i @click.stop="delonetopic(item.value)" class="cl"><Icon type="close-circled"></Icon></i> </span></Option>
                 </Select>
                 <button @click="addTopic" class="b-cm-p">+添加</button>
@@ -40,13 +40,8 @@ export default {
             value:'',
             tl:'',
             cityList: [],
-            model1: '',
-            id:'',
-            tp:''
+            model1: ''
         }
-    },
-    props:{
-        data:{default:{}}
     },
     methods:{
         cf() {
@@ -73,18 +68,12 @@ export default {
             // console.log(this.content)
         },
         save() {
-            console.log(this.model1)
-            if(this.data.id) {
-                this.axios.post(API.updatepaper,{id:this.data.id,content:this.content,topic:this.model1,tl:this.tl}).then((res)=>{
-                    this.$Message.success('文章更新成功');
-                })
-            } else {
-                this.axios.post(API.addpaper,{content:this.content,topic:this.model1,tl:this.tl}).then((res)=>{
-                    this.content = '';
-                    this.tl = '';
-                    this.$Message.success('添加文章成功');
-                })
-            }
+            this.axios.post(API.addpaper,{content:this.content,topic:this.model1,tl:this.tl}).then((res)=>{
+                // console.log(res)
+                this.content = '';
+                this.tl = '';
+                this.$message.success('添加文章成功');
+            })
         },
         getalltopic() {
             this.axios.get(API.getopic).then((res)=>{
@@ -99,23 +88,11 @@ export default {
             })
         }
     },
-    mounted() {
-        console.log('cre',this.data.topic);
-        this.content = this.data.content;
-        this.model1 = this.data.topic;
-        this.tl = this.data.tl;
-        this.id = this.data.id;
-        this.tp = this.data.tp;
+    created() {
         this.getalltopic();
     },
-    watch:{
-        // data(n) {
-        //     console.log('n',n)
-        //     this.content = n.content;
-        //     this.model1 = n.topic;
-        //     this.tl = n.tl;
-        //     this.id = n.id;
-        // }
+    mounted() {
+
     },
     components:{
         model

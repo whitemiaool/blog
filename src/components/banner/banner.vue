@@ -123,6 +123,7 @@ a {
     height: 52px;
     box-shadow: 0 1px 3px rgba(26,26,26,.1);
     background-clip: content-box;
+    z-index: 999;
 }
 .banner-inner {
     position: relative;

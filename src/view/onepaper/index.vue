@@ -5,21 +5,12 @@
             <div style="margin-right: 10px;width: 694px;padding-bottom: 20px;">
                 <div class="b-o" v-for="(item,i) in blogs">
                     <div class="b-f">来自话题：<span>{{item.topic}}</span></div>
-                    <!-- <div class="b-t">{{item.title}}</div> -->
-                    <a class="b-t" :href='item.paperindex' target="_blank">{{item.title}}</a>
-                    <div v-if="item.showCon" class="b-xx">作者及其女友觉得很赞</div>
-                    <!-- <div @click="showcontent(i)" v-if="!item.showCon" style="margin-top: -10px;">
-                        <div class="b-i-w" v-if="item.img">
-                            <img :src="item.img" alt="">
-                        </div>
-                        <div class="b-b-w">
-                            <div class="b-b-c">{{item.brief}}<span class="b-c-m">阅读全文</span></div>
-                        </div>
-                        <div style="clear:both"></div>
-                    </div> -->
+                    <a class="b-t" :href='item.paperindex'>{{item.title}}</a>
+                    <div class="b-xx">作者及其女友觉得很赞</div>
                     <div >
                         <div v-html="item.content" class="b-all markdown-body">
                         </div>
+                        <div class="edit-at">记于 {{new Date(item.meta.createAt).toLocaleDateString()}}</div>
                     </div>
                     <div class="b-c-w">
                         <div class="b-c" :class="{'isfix':item.showFix}" :data-index="i" >
@@ -27,13 +18,10 @@
                             <i class="icon iconfont icon-dianzan"></i>
                             {{item.star||0}}
                             </button>
-                            <!-- <span> 
-                                <span>{{item.star}}</span>
-                            </span> -->
                             <div class="b-c-c-w">
                                 <span  class="b-c-c com">
                                     <i class="icon iconfont icon-icon_comment"></i>
-                                    {{item.commentL||0+'条评论'}}{{item.cmt}}
+                                    {{item.commentL||0}}条评论
                                 </span>
                                 <span class="b-c-c fasong">
                                     <i class="icon iconfont icon-fasong"></i>
@@ -69,8 +57,9 @@
                              <Page  @on-change="changepage" :total="(parseInt(item.commentL/10)+1)*10" size="small"></Page>
                         </div>
                         <div class="b-cm-f">
-                            <textarea v-model="comm" placeholder="请写下你的评价" name="" id="" cols="10" rows="5"></textarea>
+                            <textarea :style="{'height':fs?'90px':''}" v-model="comm" placeholder="如果你又什么想说的" name="" id="" cols="10" rows="5"></textarea>
                             <button @click="sendc(item,i)" class="b-cm-p">评价</button>
+                            <input @blur="nxf(false)" @focus="nxf(true)" v-model="name" placeholder="大名" class="b-cm-f-n" type="text">
                         </div>
                     </div>
                 </div>
@@ -99,9 +88,14 @@ export default {
             comm:'',
             cp:0,
             lcp:0,
+            name:'',
+            fs:false
         }
     },
     methods:{
+        nxf(f) {
+            this.fs = f
+        },
         starcm(a,b,c,d) {
             this.axios.post(API.starcomment,{id:a._id,cid:b._id}).then((res)=>{
                 if(res.data.code >10) {
@@ -157,12 +151,14 @@ export default {
             return result;
         },
         sendc(item,i) {
-            !!this.comm.trim()&&this.axios.post(API.commentpaper,{id:item._id,comm:this.comm}).then((res)=>{
+            !!this.comm.trim()&&this.axios.post(API.commentpaper,{id:item._id,comm:this.comm,name:this.name}).then((res)=>{
                 if(res.data.code > 10) {
                      this.comm = ''
                      this.$Message.success('评论提交了');
-                     this.blogs[i].comments = res.data.data;
-                     this.blogs[i].commentL = res.data.data.length;
+                     let cm = this.blogs[i].comments || []
+                     cm.push(res.data.data);
+                     this.blogs[i].comments = cm
+                     this.blogs[i].commentL = this.blogs[i].commentL + 1;
                 } else {
                     this.$Message.error('life is shit');
                 }
